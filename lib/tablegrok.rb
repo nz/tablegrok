@@ -8,9 +8,12 @@ class Tablegrok
   
   def parse(thing)
     _parse case thing
-    when XML::Document: thing
-    when IO, File:      XML::HTMLParser.io(thing, OPTIONS).parse
-    else;               XML::HTMLParser.string(thing.to_s, OPTIONS).parse
+    when XML::Document
+      thing
+    when IO, File
+      XML::HTMLParser.io(thing, OPTIONS).parse
+    else
+      XML::HTMLParser.string(thing.to_s, OPTIONS).parse
     end
   end
   
